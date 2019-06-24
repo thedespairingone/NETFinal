@@ -26,5 +26,16 @@ namespace NETFinalProj.Controllers
 
             return View();
         }
+
+        public JsonResult SignIn(string name, string password)
+        {
+            var judge = "-1";
+            if (name == "user" && password == "1234")
+            {
+                judge = "1";
+            }
+
+            return Json(judge, JsonRequestBehavior.AllowGet);
+        }
     }
 }
