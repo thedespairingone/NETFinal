@@ -89,6 +89,15 @@
                     <span id="duration"></span>
                 </h4>
 
+                <h4>
+                    <span class="label label-info">电影评分</span>
+                    <span id="rateNum"></span>
+                </h4>
+                <h4>
+                    <span class="label label-info">评分人数</span>
+                    <span id="peopleNum"></span>
+                </h4>
+
             </div>
             <div class="col-lg-2"></div>
         </div>
@@ -181,7 +190,11 @@
 
         document.getElementById("duration").innerHTML = (temp.duration + "分钟");
 
-            document.getElementById("abstract").innerHTML = temp.summary;
+    document.getElementById("abstract").innerHTML = temp.summary;
+
+        document.getElementById("rateNum").innerHTML = temp.rating.average;
+
+    document.getElementById("peopleNum").innerHTML = temp.rating.rating_people;
 
         function AddFilm() {
                     location.href = "/Film/AddFilm";
