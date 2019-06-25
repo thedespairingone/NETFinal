@@ -186,3 +186,4 @@ C:\Users\54245\Documents\GitHub\NETFinalT\NETFinalProj\obj\Debug\NETFinalProj.dl
 C:\Users\54245\Documents\GitHub\NETFinalT\NETFinalProj\obj\Debug\NETFinalProj.pdb
 C:\Users\54245\Documents\GitHub\NETFinalT\NETFinalProj\bin\GetJSON.dll
 C:\Users\54245\Documents\GitHub\NETFinalT\NETFinalProj\bin\GetConnectFilm.dll
+C:\Users\54245\Documents\GitHub\NETFinalT\NETFinalProj\obj\Debug\NETFinalProj.csproj.ResolveComReference.cache
