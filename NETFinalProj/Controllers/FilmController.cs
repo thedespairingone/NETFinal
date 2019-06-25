@@ -4,16 +4,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NETFinalProj.Services;
+using System.Threading;
 
 namespace NETFinalProj.Controllers
 {
     public class FilmController : Controller
     {
+        static int Times = 0;
+        private static readonly object o = new object();
+        public static void add()
+        {
+            lock (o)
+            {
+                Times=Times+1;
+            }
+        }
         // GET: Film
         public ActionResult FilmIndex(String name=null)
         {
+            Thread t=new Thread(FilmController.add);
+            t.Start();
             ViewBag.Message = "Your contact page.";
-       
+            
             //热门电影
             ViewBag.hotMovie = Film.getSortedMovieListByHot();
             ViewBag.ChineseHotMovie = Film.getSortedMovieListByHot("中国");
@@ -26,7 +38,7 @@ namespace NETFinalProj.Controllers
             ViewBag.ItlianHighRateMovie = Film.getSortedMovieListByRate("意大利");
             ViewBag.KoreanHighRateMovie = Film.getSortedMovieListByRate("韩国");
             ViewBag.JapanHighRateMovie = Film.getSortedMovieListByRate("日本");
-
+            ViewBag.times = FilmController.Times;
             //最新评论
             ViewBag.newestComments = Comment.GetLatestComments();
             ViewBag.name = name;
