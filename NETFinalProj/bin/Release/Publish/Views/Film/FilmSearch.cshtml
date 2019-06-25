@@ -1,0 +1,53 @@
+﻿<h2>FilmSearch</h2>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body class="container">
+    <text hidden="hidden" id="searchMovieList"> @ViewBag.movieList</text>
+    <div id="search">
+        <div class="row">
+            <div class="col-md-12"><h5 class="page-header"></h5></div>
+            <div class="col-md-12">搜索关键词“<span style="color:goldenrod">@ViewBag.searchCt</span>”</div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div v-for="one in movieList" class="col-md-2" v-bind:id="one.title" style="height:350px"  v-on:click="getDetail($event)">
+                  
+                        <img v-bind:src="one.poster" style="width:180px;height:270px"  onerror="this.src='../../image/movie5.jpg'" />
+
+                        <div class="row" style="margin-left:0px;margin-right:0px;width:180px">
+                            <div class="col-md-12">{{one.title}}<span style="color:goldenrod">{{one.rating_average}}</span></div>
+                        </div>
+                        <div class="col-md-12"><h5 class="page-header"></h5></div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var search = new Vue({
+        el: '#search',
+        data: {           
+            movieList: JSON.parse(document.getElementById('searchMovieList').innerHTML),   
+        },
+        methods: {
+            getDetail(event) {
+                var id = event.currentTarget.id
+                var href = "/Film/FilmDetail?name=" + document.getElementById('userName').innerHTML + "&input=" + id
+                window.location.href = href
+            },
+          
+        }
+    })
+</script>

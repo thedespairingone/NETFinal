@@ -1,0 +1,180 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "AddFilmOver";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+
+</head>
+<body>
+    <text id="allMovie" hidden="hidden">
+        @ViewBag.movie
+    </text>
+
+    <div class="container">
+        <!--添加，删除，修改电影信息的按钮-->
+        <div class="row">
+            <div class="col-lg-3">
+                <button class="btn btn-default" onclick="AddFilm()">添加电影</button>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn btn-default" onclick="SearchFilm()">查找电影</button>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn btn-default" onclick="EditFilm()">删除电影</button>
+            </div>
+        </div>
+        <!--    设置格式与id-->
+        <!--    电影名-->
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <h2 id="filmName">hell</h2>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+        <!--    图片与零碎信息-->
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-3">
+                <img src="IronMan.jpg" class="img-rounded" onerror="this.src='../Content/Images/IronMan.jpg'" id="image" height="300" width="200" />
+
+            </div>
+            <div class="col-lg-5">
+                <h4>
+                    <span class="label label-info">导演</span>
+                    <span id="director"></span>
+                </h4>
+
+                <h4>
+                    <span class="label label-info">编剧</span>
+                    <span id="writer"></span>
+                </h4>
+
+                <h4>
+                    <span class="label label-info">主演</span>
+                    <span id="cast"></span>
+                </h4>
+
+                <h4>
+                    <span class="label label-info">类型</span>
+                    <span id="genres"></span>
+                </h4>
+
+                <h4>
+                    <span class="label label-info">制片国家/地区</span>
+                    <span id="country"></span>
+                </h4>
+
+                <h4>
+                    <span class="label label-info">语言</span>
+                    <span id="language"></span>
+                </h4>
+
+                <h4>
+                    <span class="label label-info">上映日期</span>
+                    <span id="date"></span>
+                </h4>
+
+                <h4>
+                    <span class="label label-info">片长</span>
+                    <span id="duration"></span>
+                </h4>
+
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2"> </div>
+            <div class="col-lg-8">
+                <br>
+                <h2>剧情简介</h2>
+                <p id="abstract"></p>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+
+    <script>
+        //读取处理json文件
+        var temp1 = document.getElementById("allMovie").innerHTML;
+        var temp2 = JSON.parse(temp1);
+        var temp = temp2[0]
+        //mJson = $.ajax({ url: "test.json", async: false });
+        //var temp = JSON.parse(mJson.responseText);
+        //var loc = location.href;
+        //var n1 = loc.length;//地址的总长度
+        //var n2 = loc.indexOf("=");//取得=号的位置
+        //var id = decodeURI(loc.substr(n2 + 1, n1 - n2));//从=号后面的内容
+
+        //console.log(id);
+        //var detailNum = Number(id);
+        console.log(temp.summary);
+        var str_temp = "";
+        document.getElementById("filmName").innerHTML = temp.title;
+
+        document.getElementById("image").src = temp.poster;
+
+        for (var i = 0; i < temp.directors.length; i++) {
+            str_temp = str_temp + temp.directors[i].name + "&nbsp&nbsp";
+        }
+        document.getElementById("director").innerHTML = str_temp;
+
+        var str_temp = "";
+        for (var i = 0; i < temp.writers.length; i++) {
+            str_temp = str_temp + temp.writers[i].name + "&nbsp&nbsp";
+        }
+        document.getElementById("writer").innerHTML = str_temp;
+
+        var str_temp = "";
+        for (var i = 0; i < temp.casts.length; i++) {
+            str_temp = str_temp + temp.casts[i].name + "&nbsp&nbsp";
+        }
+        document.getElementById("cast").innerHTML = str_temp;
+
+        var str_temp = "";
+        for (var i = 0; i < temp.genres.length; i++) {
+            str_temp = str_temp + temp.genres[i] + "&nbsp&nbsp";
+        }
+        document.getElementById("genres").innerHTML = str_temp;
+
+        var str_temp = "";
+        for (var i = 0; i < temp.countries.length; i++) {
+            str_temp = str_temp + temp.countries[i] + "&nbsp&nbsp";
+        }
+        document.getElementById("country").innerHTML = str_temp;
+
+        var str_temp = "";
+        for (var i = 0; i < temp.languages.length; i++) {
+            str_temp = str_temp + temp.languages[i] + "&nbsp&nbsp";
+        }
+        document.getElementById("language").innerHTML = str_temp;
+
+        var str_temp = "";
+        for (var i = 0; i < temp.pubdate.length; i++) {
+            str_temp = str_temp + temp.pubdate[i] + "&nbsp&nbsp";
+        }
+        document.getElementById("date").innerHTML = str_temp;
+
+        document.getElementById("duration").innerHTML = (temp.duration + "分钟");
+
+        document.getElementById("abstract").innerHTML = temp.summary;
+    </script>
+</body>
+</html>
+
+
+

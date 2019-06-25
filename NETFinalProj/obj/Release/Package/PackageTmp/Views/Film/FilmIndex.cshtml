@@ -1,0 +1,220 @@
+﻿<style>
+    .gd {
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+
+    .gdImage {
+        height: 200px;
+        width: 150px;
+        border-radius: 20px;
+    }
+
+    .gdText {
+        text-align: center;
+    }
+</style>
+<div id="app" class="container">
+    <text id="comment" hidden="hidden">@ViewBag.newestComments</text>
+    <text id="hotMovie" hidden="hidden">@ViewBag.hotMovie</text>
+    <text id="ChineseHotMovie" hidden="hidden">@ViewBag.ChineseHotMovie</text>
+    <text id="AmericanHotMovie" hidden="hidden">@ViewBag.AmericanHotMovie</text>
+    <text id="highRateMovie" hidden="hidden">@ViewBag.highRateMovie</text>
+    <text id="ChineseHighRateMovie" hidden="hidden">@ViewBag.ChineseHighRateMovie</text>
+    <text id="AmericanHighRateMovie" hidden="hidden">@ViewBag.AmericanHighRateMovie</text>
+    <text id="EnglishHighRateMovie" hidden="hidden">@ViewBag.EnglishHighRateMovie</text>
+    <text id="ItlianHighRateMovie" hidden="hidden">@ViewBag.ItlianHighRateMovie</text>
+    <text id="KoreanHighRateMovie" hidden="hidden">@ViewBag.KoreanHighRateMovie</text>
+    <text id="JapanHighRateMovie" hidden="hidden">@ViewBag.JapanHighRateMovie</text>
+    <div class="row" style="margin-top:30px">
+        <div class="col-md-9" style="margin-right:0;padding-right:0;height:300px">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner img-rounded">
+                    <div class="item active">
+                        <div class="row">
+                            <div class="col-md-3" v-for="n in 4 " v-bind:id="hotMovie[n-1].title" v-on:click="getDetail($event)">
+                                <div class="row">
+                                    <div class="col-md-12"><img v-bind:src="hotMovie[n-1].poster" style="width:160px;height:250px" onerror="this.src='../../image/movie.jpg'"/></div>
+                                    <div class="col-md-12"><span style="color:orangered">{{hotMovie[n-1].title}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-md-3" v-for="n in 4 " v-bind:id="hotMovie[n+3].title" v-on:click="getDetail($event)">
+                                <div class="row">
+                                    <div class="col-md-12"><img v-bind:src="hotMovie[n+3].poster" style="width:160px;height:250px"onerror="this.src='../../image/movie2.jpg'" /></div>
+                                    <div class="col-md-12"><span style="color:orangered">{{hotMovie[n+3].title}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-md-3" v-for="n in 4 " v-bind:id="hotMovie[n+7].title" v-on:click="getDetail($event)">
+                                <div class="row">
+                                    <div class="col-md-12"><img v-bind:src="hotMovie[n+7].poster" style="width:160px;height:250px"  onerror="this.src='../../image/movie3.jpg'"/></div>
+                                    <div class="col-md-12"><span style="color:orangered">{{hotMovie[n+7].title}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" style="margin-left:0;padding-left:0;">
+
+
+            <a href="#" class="list-group-item active">
+                热评电影榜
+            </a>
+            <a href="#" class="list-group-item list-group-item-danger" v-on:click="getDetail($event)" v-bind:id="hotMovie[0].title">Top1   {{hotMovie[0].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[0].rating.rating_people}}</span></span></a>
+            <a href="#" class="list-group-item list-group-item-warning" v-on:click="getDetail($event)" v-bind:id="hotMovie[1].title">Top2   {{hotMovie[1].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[1].rating.rating_people}}</span></span></a>
+            <a href="#" class="list-group-item list-group-item-success" v-on:click="getDetail($event)" v-bind:id="hotMovie[2].title">Top3   {{hotMovie[2].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[2].rating.rating_people}}</span></span></a>
+            <a href="#" class="list-group-item" v-on:click="getDetail($event)" v-bind:id="hotMovie[3].title">Top4   {{hotMovie[3].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[3].rating.rating_people}}</span></span></a>
+            <a href="#" class="list-group-item" v-on:click="getDetail($event)" v-bind:id="hotMovie[2].title">Top5   {{hotMovie[4].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[4].rating.rating_people}}</span></span></a>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">高分电影</a>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li v-on:click="getSort($event)" class="active"><a href="#">全部</a></li>
+                            <li><a href="#" v-on:click="getSort($event)">中国</a></li>
+                            <li><a href="#" v-on:click="getSort($event)">美国</a></li>
+                            <li><a href="#" v-on:click="getSort($event)">英国</a></li>
+                            <li><a href="#" v-on:click="getSort($event)">韩国</a></li>
+                            <li><a href="#" v-on:click="getSort($event)">意大利</a></li>
+                            <li><a href="#" v-on:click="getSort($event)">日本</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-2" v-for="one in displayNow" style="margin-bottom:20px;height:300px" v-bind:id="one.title" v-on:click="getDetail($event)">
+            <div class="row">
+                <div class="col-md-12"><img v-bind:src="one.poster" style="width:160px;height:250px"  onerror="this.src='../../image/movie5.jpg'" /></div>
+                <div class="col-md-12"><div style="width:160px;">{{one.title}}<span style="color:goldenrod">&nbsp;&nbsp;&nbsp;{{one.rating.average}}</span></div></div>
+            </div>
+        </div>
+
+    </div>
+    <div style="margin-top:20px">
+        <h3 class="page-header">最新评论</h3>
+    </div>
+    <div class="row">
+        <div v-for="one in comment" class="col-md-6">
+            <div class="row">
+
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12" style="color:orangered">电影：{{one.film}}</div>
+                        <div class="col-md-12">
+                            用户<span style="color:goldenrod">{{one.user}}</span>给出了{{one.rate}}的评分
+                        </div>
+                        <div class="col-md-12">{{one.content}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success">
+                        <span class="glyphicon glyphicon-thumbs-up "></span>
+                    </button>
+                    <button class="btn btn-danger">
+                        <span class="glyphicon glyphicon-thumbs-down"></span>
+                    </button>
+                </div>
+            </div>
+            <h5 class="page-header"></h5>
+        </div>
+    </div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            comment: JSON.parse(document.getElementById('comment').innerHTML),
+            hotMovie: JSON.parse(document.getElementById('hotMovie').innerHTML),
+            ChineseHotMovie: JSON.parse(document.getElementById('ChineseHotMovie').innerHTML),
+            AmericanHotMovie: JSON.parse(document.getElementById('AmericanHotMovie').innerHTML),
+            highRateMovie: JSON.parse(document.getElementById('highRateMovie').innerHTML).slice(0, 12),
+            ChineseHighRateMovie: JSON.parse(document.getElementById('ChineseHighRateMovie').innerHTML).slice(0, 12),
+            AmericanHighRateMovie: JSON.parse(document.getElementById('AmericanHighRateMovie').innerHTML).slice(0, 12),
+            EnglishHighRateMovie: JSON.parse(document.getElementById('EnglishHighRateMovie').innerHTML).slice(0, 12),
+            ItlianHighRateMovie: JSON.parse(document.getElementById('ItlianHighRateMovie').innerHTML).slice(0, 12),
+            KoreanHighRateMovie: JSON.parse(document.getElementById('KoreanHighRateMovie').innerHTML).slice(0, 12),
+            JapanHighRateMovie: JSON.parse(document.getElementById('JapanHighRateMovie').innerHTML).slice(0, 12),
+
+            highRateNow: '全部',
+            displayNow: []
+        },
+        methods: {
+            init() {
+                this.highRateNow = '全部'
+                this.displayNow = this.highRateMovie
+            },
+            getDetail(event) {
+                var id = event.currentTarget.id
+                var href = "/Film/FilmDetail?name=" + document.getElementById('userName').innerHTML + "&input=" + id
+                window.location.href = href
+            },
+            getSort(event) {
+                var element = event.currentTarget;
+                if (element.innerHTML == '日本') {
+                    this.highRateNow = '日本'
+                    this.displayNow = this.JapanHighRateMovie
+                }
+                else if (element.innerHTML == '中国') {
+                    this.highRateNow = '中国'
+
+                    this.displayNow = this.ChineseHighRateMovie
+
+                }
+                else if (element.innerHTML == '美国') {
+                    this.highRateNow = '美国'
+                    this.displayNow = this.AmericanHighRateMovie
+                }
+                else if (element.innerHTML == '英国') {
+                    this.highRateNow = '英国'
+                    this.displayNow = this.EnglishHighRateMovie
+                }
+                else if (element.innerHTML == '意大利') {
+                    this.highRateNow = '意大利'
+                    this.displayNow = this.ItlianHighRateMovie
+                }
+                else if (element.innerHTML == '韩国') {
+                    this.highRateNow = '韩国'
+                    this.displayNow = this.KoreanHighRateMovie
+                }
+                else {
+                    this.highRateNow = '全部'
+                    this.displayNow = this.highRateMovie
+                }
+
+            }
+        },
+        watch: {
+            highRateNow: function () {
+
+            }
+        },
+
+    })
+    app.init()
+</script>

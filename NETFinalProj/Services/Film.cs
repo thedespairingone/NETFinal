@@ -307,11 +307,11 @@ namespace NETFinalProj.Services
             //String someMovie = GetJSON.getJsonString(movies);
             //return someMovie;
 
-            GetAverageLib.ForNet classForAver = new GetAverageLib.ForNet();
-            float newAverageTemp= (float)Math.Round((double)classForAver.CalculateAverage(peopleNum, rate, myRate), 2); 
-            String newAverage = newAverageTemp.ToString();
+            //GetAverageLib.ForNet classForAver = new GetAverageLib.ForNet();
+            //float newAverageTemp= (float)Math.Round((double)classForAver.CalculateAverage(peopleNum, rate, myRate), 2); 
+            //String newAverage = newAverageTemp.ToString();
 
-            //String newAverage = Film.CalculateAverage(peopleNum,rate,myRate).ToString();
+            String newAverage = Film.CalculateAverage(peopleNum, rate, myRate).ToString();
             String newPeopleNum = Convert.ToInt32(peopleNum).ToString();
 
             //将计算好的新平均分和人数更新数据库

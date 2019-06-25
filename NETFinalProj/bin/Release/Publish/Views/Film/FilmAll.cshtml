@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "FilmAll";
+}
+
+<h2>FilmAll</h2>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <text hidden="hidden" id="movieList">@ViewBag.movies</text>
+    <div id="base">
+        <div class="row">
+            <div class="col-md-12">
+
+                <ul class="breadcrumb" style="margin:0;">
+                    <li id="1" v-on:click="setSort($event)"><a href="#">热度排序</a></li>
+                    <li id="0" v-on:click="setSort($event)"><a href="#">好评度排序</a></li>
+                </ul>
+                <ul class="breadcrumb" style="margin:0">
+                    <li class="active">地区</li>
+                    <li v-for="one in allCon" v-bind:id="one" v-on:click="setCon($event)"><a href="#">{{one}}</a></li>
+
+                </ul>
+                <ul class="breadcrumb" style="margin:0">
+                    <li class="active">语言</li>
+                    <li v-for="one in allLan" v-bind:id="one" v-on:click="setLan($event)"><a href="#">{{one}}</a></li>
+                </ul>
+                <ul class="breadcrumb" style="margin:0">
+                    <li class="active">类型</li>
+                    <li v-for="one in allGen" v-bind:id="one" v-on:click="setGen($event)"><a href="#">{{one}}</a></li>
+                </ul>
+            </div>
+            <div class="col-md-12"><h5 class="page-header"></h5></div>
+            检索条件：&nbsp;地区<span style="color:goldenrod">{{nowCon}}</span>&nbsp;语言<span style="color:goldenrod">{{nowLan}}</span>&nbsp;
+            类型<span style="color:goldenrod">{{nowGen}}</span>
+            <div class="col-md-12"><h5 class="page-header"></h5></div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div v-for="one in movieList" class="col-md-2" v-bind:id="one.title" style="height:350px" v-on:click="getDetail($event)">
+                        @* 这块加电影 *@
+                        <img v-bind:src="one.poster" style="width:180px;height:270px"  onerror="this.src='../../image/movie5.jpg'"/>
+
+                        <div class="row" style="margin-left:0px;margin-right:0px;width:180px">
+                            <div class="col-md-12">{{one.title}} <span style="color:goldenrod">{{one.rating.average}}</span></div>
+                        </div>
+                        <div class="col-md-12"><h5 class="page-header"></h5></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <nav aria-label="Page navigation" style="text-align:center">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var app = new Vue({
+        el: '#base',
+        data: {
+            allGen: ['全部','动作', '科幻', '喜剧', '恐怖', '悬疑', '历史', '动画', '武侠', '爱情', '奇幻', '惊悚', '戏曲', '剧情', 
+                '家庭', '惊栗', '黑色电影', '灾难', '战争', '悬念', '冒险', '音乐', '情色', '歌舞', '犯罪', '脱口秀', '传记', '纪录片', '运动', '同性'],
+
+            allLan: ['全部','英语','汉语','日语','法语','韩语','西班牙语','法语','德语','葡萄牙语','俄语'],
+            allCon: ['全部', '中国', '美国', '英国', '日本', '韩国', '德国', '法国', '葡萄牙', '西班牙', '俄罗斯'],
+            nowGen: '@ViewBag.genre',
+            nowLan: '@ViewBag.language',
+            nowCon: '@ViewBag.country',
+            nowSort: '@ViewBag.sortMethod',
+            skip: '@ViewBag.skip',
+            movieList: JSON.parse(document.getElementById('movieList').innerHTML),
+        },
+        methods: {
+            getDetail(event) {
+                var id = event.currentTarget.id
+                var href = "/Film/FilmDetail?name=" + document.getElementById('userName').innerHTML + "&input=" + id
+                window.location.href = href
+            },
+            setCon(event) {
+                var id = event.currentTarget.id
+            
+                this.nowCon = id
+                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip + "&name=" + document.getElementById('userName').innerHTML
+                window.location.href = href
+            },
+            setLan(event) {
+                var id = event.currentTarget.id
+           
+                this.nowLan = id
+                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip + "&name=" + document.getElementById('userName').innerHTML
+                window.location.href = href
+            },
+            setGen(event) {
+                var id = event.currentTarget.id
+              
+                this.nowGen = id
+                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip + "&name=" + document.getElementById('userName').innerHTML
+                window.location.href = href
+            },
+            setSort(event) {
+                var id = event.currentTarget.id
+               
+                this.nowSort = id
+                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip + "&name=" + document.getElementById('userName').innerHTML
+                window.location.href = href
+            }
+        },
+    })
+
+
+    //btSearch.onclick = function () {
+    //    var searchCt = document.getElementById('searchCt').value
+    //    var href = "/Film/FilmSearch?input=" + searchCt
+    //    window.location.href = href
+    //}
+</script>

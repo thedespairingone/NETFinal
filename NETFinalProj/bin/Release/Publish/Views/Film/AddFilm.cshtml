@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "AddFilm";
+}
+
+
+@{
+    ViewBag.Title = "AddFilmOver";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+
+</head>
+<body>
+    <text id="allMovie" hidden="hidden">
+    </text>
+    <div class="container">
+        <!--添加，删除，修改电影信息的按钮-->
+        <div class="row">
+            <div class="col-lg-3">
+                <button class="btn btn-default" onclick="AddFilm()">添加电影</button>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn btn-default" onclick="SearchFilm()">查找电影</button>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn btn-default" onclick="EditFilm()">删除电影</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">           
+            </div>
+            <div class="col-lg-3">
+                <button class="btn btn-default" onclick="Submit()">提交信息</button>
+            </div>
+            <div class="col-lg-3">
+            </div>
+        </div>
+
+        <!--    设置格式与id-->
+        <!--    电影名-->
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <span class="label label-info" style="width:250px;height:30px">电影名称</span>
+                <input type="text" id="title" placeholder="输入电影名称" class="form-control" style="width:250px;height:30px">
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+        <!--    图片与零碎信息-->
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <h4>
+                    <span class="label label-info">导演</span>
+                    <input type="text" id="directors" placeholder="导演名称，空格分割" class="form-control" style="width:250px;height:30px">
+                </h4>
+                <h4>
+                    <span class="label label-info">海报</span>
+                    <input type="text" id="poster" placeholder="海报名称" class="form-control" style="width:250px;height:30px">
+                </h4>
+
+                <h4>
+                    <span class="label label-info">编剧</span>
+                    <input type="text" id="writers" placeholder="编剧名称，空格分割" class="form-control" style="width:250px;height:30px">
+                </h4>
+
+                <h4>
+                    <span class="label label-info">主演</span>
+                    <input type="text" id="casts" placeholder="主演，空格分割" class="form-control" style="width:250px;height:30px">
+                </h4>
+
+                <h4>
+                    <span class="label label-info">类型</span>
+                    <input type="text" id="genres" placeholder="电影类别，空格分割" class="form-control" style="width:250px;height:30px">
+                </h4>
+
+                <h4>
+                    <span class="label label-info">制片国家/地区</span>
+                    <input type="text" id="countries" placeholder="国家，空格分割" class="form-control" style="width:250px;height:30px">
+                </h4>
+
+                <h4>
+                    <span class="label label-info">语言</span>
+                    <input type="text" id="languages" placeholder="语言，空格分割" class="form-control" style="width:250px;height:30px">
+                </h4>
+
+                <h4>
+                    <span class="label label-info">上映日期</span>
+                    <input type="text" id="pubdate" placeholder="上映日期，空格分割" class="form-control" style="width:250px;height:30px">
+                </h4>
+
+                <h4>
+                    <span class="label label-info">片长</span>
+                    <input type="text" id="length" placeholder="片长/分钟" class="form-control" style="width:250px;height:30px">
+                </h4>
+
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <br>
+                <h2>剧情简介</h2>
+                <textarea class="form-control" id="summary" rows="6" style="min-width:90%" placeholder="剧情简介" width="1000px"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+         function Submit() {
+             console.log(document.getElementById("title").value);
+             console.log(document.getElementById("poster").value);
+             console.log(document.getElementById("directors").value);
+             console.log(document.getElementById("writers").value);
+             console.log(document.getElementById("casts").value);
+             console.log(document.getElementById("genres").value);
+             console.log(document.getElementById("countries").value);
+             console.log(document.getElementById("languages").value);
+             console.log(document.getElementById("pubdate").value);
+             console.log(document.getElementById("length").value);
+             console.log(document.getElementById("summary").value);
+             location.href = "/Film/AddFilmOver?" + "title=" + document.getElementById("title").value + "&"
+                 + "poster=" + document.getElementById("poster").value + "&"
+                 + "directors=" + document.getElementById("directors").value + "&"
+                 + "writers=" + document.getElementById("writers").value + "&"
+                 + "casts=" + document.getElementById("casts").value + "&"
+                 + "genres=" + document.getElementById("genres").value + "&"
+                 + "countries=" + document.getElementById("countries").value + "&"
+                 + "languages=" + document.getElementById("languages").value + "&"
+                 + "pubdate=" + document.getElementById("pubdate").value + "&"
+                 + "length=" + document.getElementById("length").value + "&"
+                 + "summary=" + document.getElementById("summary").value + "&name=" + document.getElementById('userName').innerHTML; 
+            }
+
+    </script>
+</body>
+</html>
+
