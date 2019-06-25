@@ -83,13 +83,13 @@ namespace NETFinalProj.Controllers
             return View();
         }
         public ActionResult AddFilmOver(String title, String poster,String directors, String writers, String casts, String genres, String countries,
-        String languages, String pubdate, String length, String summary)
+        String languages, String pubdate, String length, String summary,String name=null)
         {
             Film.InsertFilm( title,  poster, directors,  writers,  casts,  genres,  countries,
          languages,  pubdate,  length,  summary);
             ViewBag.SearchKey = title;
             ViewBag.Message = "Your contact page.";
-             return Redirect("FilmIndex"); 
+             return Redirect("FilmIndex?name="+name); 
         }
 
         public ActionResult UpdateFilm(String title,String name=null)
