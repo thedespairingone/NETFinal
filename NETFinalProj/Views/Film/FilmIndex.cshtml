@@ -43,21 +43,30 @@
                     <div class="item active">
                         <div class="row">
                             <div class="col-md-3" v-for="n in 4 " v-bind:id="hotMovie[n-1].title" v-on:click="getDetail($event)">
-                                <img v-bind:src="hotMovie[n-1].title" style="width:160px" />
+                                <div class="row">
+                                    <div class="col-md-12"><img v-bind:src="hotMovie[n-1].poster" style="width:160px" /></div>
+                                    <div class="col-md-12"><span style="color:orangered">{{hotMovie[n-1].title}}</span></div>
+                                </div>                               
                             </div>
                         </div>
                     </div>
                     <div class="item">
                         <div class="row">
                             <div class="col-md-3" v-for="n in 4 " v-bind:id="hotMovie[n+3].title" v-on:click="getDetail($event)">
-                                <img v-bind:src="hotMovie[n+3].title" style="width:160px" />
+                                <div class="row">
+                                    <div class="col-md-12"><img v-bind:src="hotMovie[n+3].poster" style="width:160px" /></div>
+                                    <div class="col-md-12"><span style="color:orangered">{{hotMovie[n+3].title}}</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="item">
                         <div class="row">
                             <div class="col-md-3" v-for="n in 4 " v-bind:id="hotMovie[n+7].title" v-on:click="getDetail($event)">
-                                <img v-bind:src="hotMovie[n+7].title" style="width:160px" />
+                                <div class="row">
+                                    <div class="col-md-12"><img v-bind:src="hotMovie[n+7].poster" style="width:160px" /></div>
+                                    <div class="col-md-12"><span style="color:orangered">{{hotMovie[n+7].title}}</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>

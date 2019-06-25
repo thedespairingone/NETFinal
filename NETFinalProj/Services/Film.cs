@@ -260,7 +260,7 @@ namespace NETFinalProj.Services
         //DeleteFilm
         public static String DeleteFilm(String title)
         {
-            var filter = Builders<BsonDocument>.Filter.Eq("title", "title");
+            var filter = Builders<BsonDocument>.Filter.Eq("title", title);
             var result = GetConnectFilm.collection.DeleteMany(filter);
             return "DeleteOK";
         }

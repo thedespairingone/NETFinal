@@ -44,7 +44,8 @@
         methods: {
             getDetail(event) {
                 var id = event.currentTarget.id
-                alert(id)
+                var href = "/Film/FilmDetail?name=" + document.getElementById('userName').innerHTML + "&input=" + id
+                window.location.href = href
             },
           
         }

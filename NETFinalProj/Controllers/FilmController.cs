@@ -130,5 +130,15 @@ namespace NETFinalProj.Controllers
             return Json(judge, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult SignUp(string name, string password)
+        {
+            var judge = "1";
+            if (name == "user" && password == "1234")
+            {
+                judge = "1";
+            }
+            return Json(judge, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
