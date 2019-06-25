@@ -5,6 +5,7 @@ using System.Web;
 using NETFinalProj.Dao;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace NETFinalProj.Services
 {
@@ -260,9 +261,60 @@ namespace NETFinalProj.Services
         //DeleteFilm
         public static String DeleteFilm(String title)
         {
-            var filter = Builders<BsonDocument>.Filter.Eq("title", "title");
+            var filter = Builders<BsonDocument>.Filter.Eq("title", title);
             var result = GetConnectFilm.collection.DeleteMany(filter);
             return "DeleteOK";
         }
+
+
+        //提交评分
+        public static String SubmitRate( String title,String Rate)
+        {
+            //GetConnectFilm.collection.InsertOne(document);
+            var filter = Builders<BsonDocument>.Filter.Eq("title", title);
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id")
+            .Include("rating.rating_people").Include("rating.average");
+            var documents = GetConnectFilm.collection.Find(filter).Project(projection).ToList();
+            String thisMovie = documents[0].ToJson();
+            Newtonsoft.Json.Linq.JObject jo = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(thisMovie);
+            //String rate = jo["rating.rating_people"].ToString();
+            //String peopleNum = jo["rating.average"].ToString();
+            String rateTemp = jo["rating"]["average"].ToString();
+            String peopleNumTemp = jo["rating"]["rating_people"].ToString();
+            float rate = Convert.ToSingle(rateTemp);
+            float myRate = Convert.ToSingle(Rate);
+            float peopleNum = Convert.ToSingle(peopleNumTemp);
+            peopleNum = peopleNum + 1;
+            // jo = (JObject)JsonConvert.DeserializeObject(thisMovie);
+            //string zone = jo["rating.rating_people"].ToString();
+            //string zone_en = jo["rating.average"].ToString();
+
+            //List<string> movies = new List<string>();
+            //for (int i = 0; i < documents.Count; i++)
+            //{
+            //    movies.Add(documents[i].ToJson());
+            //}
+            //String someMovie = GetJSON.getJsonString(movies);
+            //return someMovie;
+
+            String newAverage = Film.CalculateAverage(peopleNum,rate,myRate).ToString();
+            String newPeopleNum = Convert.ToInt32(peopleNum).ToString();
+
+            //将计算好的新平均分和人数更新数据库
+            var filter2 = Builders<BsonDocument>.Filter.Eq("title", title);
+            var update = Builders<BsonDocument>.Update.Set("rating.rating_people", newPeopleNum).Set("rating.average", newAverage).CurrentDate("lastModified");
+            GetConnectFilm.collection.UpdateMany(filter, update);
+            return "RateOK";
+        }
+
+        //计算新的平均分
+        public static float CalculateAverage(float peopleNum,float rate,float myRate)
+        {
+            float newAverage = (rate * (peopleNum - 1) + myRate) / peopleNum;
+            newAverage = (float)Math.Round((double)newAverage, 2);
+            return newAverage;
+        }
+
+
     }
 }

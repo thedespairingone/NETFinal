@@ -12,7 +12,9 @@ namespace NETFinalProj.Controllers
         // GET: Film
         public ActionResult FilmIndex(String name)
         {
-          
+
+            MyUser.AddUser("TKT","1234");
+            MyUser.JudgeRight("TKT", "5656");
             ViewBag.Message = "Your contact page.";
        
             //热门电影
@@ -27,6 +29,9 @@ namespace NETFinalProj.Controllers
             ViewBag.ItlianHighRateMovie = Film.getSortedMovieListByRate("意大利");
             ViewBag.KoreanHighRateMovie = Film.getSortedMovieListByRate("韩国");
             ViewBag.JapanHighRateMovie = Film.getSortedMovieListByRate("日本");
+
+            //最新评论
+            ViewBag.newestComments = Comment.GetLatestComments();
             return View();
         }
 
@@ -57,6 +62,7 @@ namespace NETFinalProj.Controllers
             ViewBag.SearchKey = input;
             ViewBag.Message = "Your contact page.";
             ViewBag.movie = Film.Search(input);
+            ViewBag.newestComments = Comment.GetLatestComments(input);
             return View();
         }
 
@@ -105,6 +111,15 @@ namespace NETFinalProj.Controllers
             Film.DeleteFilm(title);
             ViewBag.Message = "Your contact page.";
             return Redirect("FilmIndex"); 
+        }
+
+        //提交评价
+        public ActionResult FilmDetailCommentOver(String name,String title,String commentContent,String Rate)
+        {
+            Comment.SubmitComment(name,title,commentContent,Rate);
+            Film.SubmitRate(title, Rate);
+            ViewBag.movie = Film.Search(title);
+            return View();
         }
 
         public ActionResult TestStar()

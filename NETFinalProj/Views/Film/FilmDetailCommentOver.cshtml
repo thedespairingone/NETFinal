@@ -1,6 +1,6 @@
-﻿@*@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-}*@
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,14 +20,6 @@
     </text>
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <br><br /><br />
-                <text  >
-                    @ViewBag.newestComments
-                </text>
-            </div>
-        </div>
         <!--添加，删除，修改电影信息的按钮-->
         <div class="row">
             <div class="col-lg-3">
@@ -192,13 +184,13 @@
             document.getElementById("abstract").innerHTML = temp.summary;
 
         function AddFilm() {
-                    location.href = "/Film/AddFilm"; 
+                    location.href = "/Film/AddFilm";
         }
         function DeleteFilm() {
                 location.href = "/Film/DeleteFilm?title=" + temp.title;
         }
     function EditFilm() {
-        location.href = "/Film/UpdateFilm?title=" + temp.title; 
+        location.href = "/Film/UpdateFilm?title=" + temp.title;
     }
     function SubmitComment() {
         location.href = "/Film/FilmDetailCommentOver?name=" + "liuchang"
@@ -211,4 +203,6 @@
 </body>
 
 </html>
+
+
 
