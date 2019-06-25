@@ -14,7 +14,7 @@ namespace NETFinalProj.Controllers
         {
 
             MyUser.AddUser("TKT","1234");
-            MyUser.JudgeRight("TKT", "5656");
+            MyUser.JudgeRight("TKT", "1234");
             ViewBag.Message = "Your contact page.";
        
             //热门电影
