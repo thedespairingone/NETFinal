@@ -184,3 +184,4 @@ C:\Users\54245\Documents\GitHub\NETFinalT\NETFinalProj\obj\Debug\NETFinalProj.cs
 C:\Users\54245\Documents\GitHub\NETFinalT\NETFinalProj\obj\Debug\NETFinalProj.csproj.CopyComplete
 C:\Users\54245\Documents\GitHub\NETFinalT\NETFinalProj\obj\Debug\NETFinalProj.dll
 C:\Users\54245\Documents\GitHub\NETFinalT\NETFinalProj\obj\Debug\NETFinalProj.pdb
+C:\Users\54245\Documents\GitHub\NETFinalT\NETFinalProj\bin\GetJSON.dll

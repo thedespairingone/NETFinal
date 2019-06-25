@@ -5,6 +5,7 @@ using System.Web;
 using NETFinalProj.Dao;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using GetJSON;
 
 namespace NETFinalProj.Services
 {
@@ -20,7 +21,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie =GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
         public static String getSortedMovieListByRate(String country)
@@ -34,7 +35,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
         public static String getSortedMovieListByHot()
@@ -47,7 +48,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
         public static String getSortedMovieListByHot(String country)
@@ -60,7 +61,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
         public static String getMovies(int skip)
@@ -72,7 +73,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
 
@@ -86,7 +87,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
 
@@ -108,7 +109,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
 
@@ -128,7 +129,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
 
@@ -164,7 +165,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
         //FilmAllPage
@@ -198,7 +199,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
 
