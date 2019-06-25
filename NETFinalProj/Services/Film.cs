@@ -102,7 +102,7 @@ namespace NETFinalProj.Services
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
             filter = builder.Or(builder.Regex("title", input),builder.Regex("casts.name",input)
             , builder.Regex("directors.name", input), builder.Regex("genres", input), builder.Regex("summary", input));
-            var documents = GetConnectFilm.collection.Find(filter).Limit(24).ToList();
+            var documents = GetConnectFilm.collection.Find(filter).Project(projection).Limit(24).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
