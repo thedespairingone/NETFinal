@@ -81,10 +81,10 @@
                 热评电影榜
             </a>
             <a href="#" class="list-group-item list-group-item-danger" v-on:click="getDetail($event)" v-bind:id="hotMovie[0].title">Top1   {{hotMovie[0].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[0].rating.rating_people}}</span></span></a>
-            <a href="#" class="list-group-item list-group-item-warning"  v-on:click="getDetail($event)" v-bind:id="hotMovie[1].title">Top2   {{hotMovie[1].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[1].rating.rating_people}}</span></span></a>
-            <a href="#" class="list-group-item list-group-item-success"  v-on:click="getDetail($event)" v-bind:id="hotMovie[2].title">Top3   {{hotMovie[2].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[2].rating.rating_people}}</span></span></a>
-            <a href="#" class="list-group-item"  v-on:click="getDetail($event)" v-bind:id="hotMovie[3].title">Top4   {{hotMovie[3].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[3].rating.rating_people}}</span></span></a>
-            <a href="#" class="list-group-item" v-on:click="getDetail($event)" v-bind:id="hotMovie[2].title" >Top5   {{hotMovie[4].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[4].rating.rating_people}}</span></span></a>
+            <a href="#" class="list-group-item list-group-item-warning" v-on:click="getDetail($event)" v-bind:id="hotMovie[1].title">Top2   {{hotMovie[1].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[1].rating.rating_people}}</span></span></a>
+            <a href="#" class="list-group-item list-group-item-success" v-on:click="getDetail($event)" v-bind:id="hotMovie[2].title">Top3   {{hotMovie[2].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[2].rating.rating_people}}</span></span></a>
+            <a href="#" class="list-group-item" v-on:click="getDetail($event)" v-bind:id="hotMovie[3].title">Top4   {{hotMovie[3].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[3].rating.rating_people}}</span></span></a>
+            <a href="#" class="list-group-item" v-on:click="getDetail($event)" v-bind:id="hotMovie[2].title">Top5   {{hotMovie[4].title}} <span style="color:goldenrod"><span class="glyphicon glyphicon-fire">{{hotMovie[4].rating.rating_people}}</span></span></a>
         </div>
 
     </div>
@@ -117,7 +117,7 @@
                 <div class="col-md-12"><div style="width:160px;">{{one.title}}<span style="color:goldenrod">&nbsp;&nbsp;&nbsp;{{one.rating.average}}</span></div></div>
             </div>
         </div>
-    
+
     </div>
     <div style="margin-top:20px">
         <h3 class="page-header">热门评论</h3>
@@ -158,7 +158,7 @@
             hotMovie: JSON.parse(document.getElementById('hotMovie').innerHTML),
             ChineseHotMovie: JSON.parse(document.getElementById('ChineseHotMovie').innerHTML),
             AmericanHotMovie: JSON.parse(document.getElementById('AmericanHotMovie').innerHTML),
-            highRateMovie: JSON.parse(document.getElementById('highRateMovie').innerHTML).slice(0,12),
+            highRateMovie: JSON.parse(document.getElementById('highRateMovie').innerHTML).slice(0, 12),
             ChineseHighRateMovie: JSON.parse(document.getElementById('ChineseHighRateMovie').innerHTML).slice(0, 12),
             AmericanHighRateMovie: JSON.parse(document.getElementById('AmericanHighRateMovie').innerHTML).slice(0, 12),
             EnglishHighRateMovie: JSON.parse(document.getElementById('EnglishHighRateMovie').innerHTML).slice(0, 12),
@@ -187,9 +187,9 @@
                 }
                 else if (element.innerHTML == '中国') {
                     this.highRateNow = '中国'
-               
+
                     this.displayNow = this.ChineseHighRateMovie
-                   
+
                 }
                 else if (element.innerHTML == '美国') {
                     this.highRateNow = '美国'
