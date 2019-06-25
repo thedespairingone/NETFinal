@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using GetJSON;
 using Newtonsoft.Json;
+using GetConnectFilm;
 
 namespace NETFinalProj.Services
 {
@@ -17,7 +18,7 @@ namespace NETFinalProj.Services
             var filter = Builders<BsonDocument>.Filter.Exists("rating");
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -32,7 +33,7 @@ namespace NETFinalProj.Services
             var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -46,7 +47,7 @@ namespace NETFinalProj.Services
             var filter = Builders<BsonDocument>.Filter.Exists("rating");
             var sort = Builders<BsonDocument>.Sort.Descending("rating.rating_people");
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -60,7 +61,7 @@ namespace NETFinalProj.Services
             var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.rating_people");
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -73,7 +74,7 @@ namespace NETFinalProj.Services
         {
             var filter = Builders<BsonDocument>.Filter.Empty;
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
-            var documents = GetConnectFilm.collection.Find(filter).Skip(skip).Project(projection).Limit(20).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Skip(skip).Project(projection).Limit(20).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -87,7 +88,7 @@ namespace NETFinalProj.Services
         {
             var filter = Builders<BsonDocument>.Filter.Empty;
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
-            var documents = GetConnectFilm.collection.Find(filter).Skip(skip).Project(projection).Limit(1).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Skip(skip).Project(projection).Limit(1).ToList();
 
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
@@ -110,7 +111,7 @@ namespace NETFinalProj.Services
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
             filter = builder.Or(builder.Regex("title", input), builder.Regex("casts.name", input)
             , builder.Regex("directors.name", input), builder.Regex("genres", input), builder.Regex("summary", input));
-            var documents = GetConnectFilm.collection.Find(filter).Project(projection).Limit(24).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Project(projection).Limit(24).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -130,7 +131,7 @@ namespace NETFinalProj.Services
             //var builder = Builders<BsonDocument>.Filter;
             //FilterDefinition<BsonDocument> filter;
             //filter = builder.And(builder.All("_id", input));
-            var documents = GetConnectFilm.collection.Find(filter).Project(projection).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Project(projection).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -167,7 +168,7 @@ namespace NETFinalProj.Services
             //var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Skip(skip).Project(projection).Limit(120).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Sort(sort).Skip(skip).Project(projection).Limit(120).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -202,7 +203,7 @@ namespace NETFinalProj.Services
             //var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.rating_people");
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Skip(skip).Project(projection).Limit(120).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Sort(sort).Skip(skip).Project(projection).Limit(120).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -231,7 +232,7 @@ namespace NETFinalProj.Services
                 {"casts", new BsonArray { new BsonDocument{ { "name", casts } } } },
                 {"writers",new BsonArray { writers }}
             };
-            GetConnectFilm.collection.InsertOne(document);
+            GetConnectFilm.GetConnectFilm.collection.InsertOne(document);
             return title;
         }
 
@@ -247,7 +248,7 @@ namespace NETFinalProj.Services
             .Set("languages", new BsonArray { languages }).Set("duration", length)
             .Set("directors", new BsonArray { new BsonDocument { { "name", directors } } }).Set("casts", new BsonArray { new BsonDocument { { "name", casts } } })
             .CurrentDate("lastModified");
-            var result = GetConnectFilm.collection.UpdateOne(filter, update);
+            var result = GetConnectFilm.GetConnectFilm.collection.UpdateOne(filter, update);
             //var document = new BsonDocument
             //{
             //    {"rating", new BsonDocument { { "rating_people", "0" }, { "average", "0"}, { "stars", new BsonArray {5} } }},
@@ -271,7 +272,7 @@ namespace NETFinalProj.Services
         public static String DeleteFilm(String title)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("title", title);
-            var result = GetConnectFilm.collection.DeleteMany(filter);
+            var result = GetConnectFilm.GetConnectFilm.collection.DeleteMany(filter);
             return "DeleteOK";
         }
 
@@ -283,7 +284,7 @@ namespace NETFinalProj.Services
             var filter = Builders<BsonDocument>.Filter.Eq("title", title);
             var projection = Builders<BsonDocument>.Projection.Exclude("_id")
             .Include("rating.rating_people").Include("rating.average");
-            var documents = GetConnectFilm.collection.Find(filter).Project(projection).ToList();
+            var documents = GetConnectFilm.GetConnectFilm.collection.Find(filter).Project(projection).ToList();
             String thisMovie = documents[0].ToJson();
             Newtonsoft.Json.Linq.JObject jo = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(thisMovie);
             //String rate = jo["rating.rating_people"].ToString();
@@ -312,7 +313,7 @@ namespace NETFinalProj.Services
             //将计算好的新平均分和人数更新数据库
             var filter2 = Builders<BsonDocument>.Filter.Eq("title", title);
             var update = Builders<BsonDocument>.Update.Set("rating.rating_people", newPeopleNum).Set("rating.average", newAverage).CurrentDate("lastModified");
-            GetConnectFilm.collection.UpdateMany(filter, update);
+            GetConnectFilm.GetConnectFilm.collection.UpdateMany(filter, update);
             return "RateOK";
         }
 
