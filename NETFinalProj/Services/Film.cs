@@ -15,7 +15,7 @@ namespace NETFinalProj.Services
         {
             var filter = Builders<BsonDocument>.Filter.Exists("rating");
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
-            var documents=GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
+            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -26,7 +26,7 @@ namespace NETFinalProj.Services
         }
         public static String getSortedMovieListByRate(String country)
         {
-            
+
             var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
             var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
@@ -101,7 +101,7 @@ namespace NETFinalProj.Services
             FilterDefinition<BsonDocument> filter;
             //filter = builder.And(builder.All("_id", input));
             var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
-            filter = builder.Or(builder.Regex("title", input),builder.Regex("casts.name",input)
+            filter = builder.Or(builder.Regex("title", input), builder.Regex("casts.name", input)
             , builder.Regex("directors.name", input), builder.Regex("genres", input), builder.Regex("summary", input));
             var documents = GetConnectFilm.collection.Find(filter).Project(projection).Limit(24).ToList();
             List<string> movies = new List<string>();
@@ -233,7 +233,7 @@ namespace NETFinalProj.Services
         {
             var filter = Builders<BsonDocument>.Filter.Eq("title", title);
             var update = Builders<BsonDocument>.Update.Set("genres", new BsonArray { genres }).Set("pubdate", new BsonArray { pubdate })
-            .Set("title", title).Set("poster",poster).Set("writers", new BsonArray { writers })
+            .Set("title", title).Set("poster", poster).Set("writers", new BsonArray { writers })
             .Set("countries", new BsonArray { countries }).Set("summary", summary)
             .Set("languages", new BsonArray { languages }).Set("duration", length)
             .Set("directors", new BsonArray { new BsonDocument { { "name", directors } } }).Set("casts", new BsonArray { new BsonDocument { { "name", casts } } })

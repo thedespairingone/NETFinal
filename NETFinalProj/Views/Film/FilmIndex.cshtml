@@ -1,37 +1,4 @@
 ﻿
-@{
-    ViewBag.Title = "FilmIndex";
-}
-//热门电影
-@ViewBag.hotMovie
-<br />
-//高评分电影
-@ViewBag.highRateMovie
-<br />
-//高评分中国电影
-@ViewBag.ChineseHighRateMovie
-<br />
-//高评分美国电影
-@ViewBag.AmericanHighRateMovie
-<br />
-//高评分英国电影
-@ViewBag.EnglishHighRateMovie
-<br />
-//高评分意大利电影
-@ViewBag.ItlianHighRateMovie
-<br />
-//高评分韩国电影
-@ViewBag.KoreanHighRateMovie
-<br />
-//高评分日本电影
-@ViewBag.JapanHighRateMovie
-
-<br />
-<br />
-<br />
-//最新评论
-@ViewBag.newestComments
-<h2>FilmIndex</h2>
 
 
 
@@ -76,21 +43,30 @@
                     <div class="item active">
                         <div class="row">
                             <div class="col-md-3" v-for="n in 4 " v-bind:id="hotMovie[n-1].title" v-on:click="getDetail($event)">
-                                <img v-bind:src="hotMovie[n-1].title" style="width:160px" />
+                                <div class="row">
+                                    <div class="col-md-12"><img v-bind:src="hotMovie[n-1].poster" style="width:160px" /></div>
+                                    <div class="col-md-12"><span style="color:orangered">{{hotMovie[n-1].title}}</span></div>
+                                </div>                               
                             </div>
                         </div>
                     </div>
                     <div class="item">
                         <div class="row">
                             <div class="col-md-3" v-for="n in 4 " v-bind:id="hotMovie[n+3].title" v-on:click="getDetail($event)">
-                                <img v-bind:src="hotMovie[n+3].title" style="width:160px" />
+                                <div class="row">
+                                    <div class="col-md-12"><img v-bind:src="hotMovie[n+3].poster" style="width:160px" /></div>
+                                    <div class="col-md-12"><span style="color:orangered">{{hotMovie[n+3].title}}</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="item">
                         <div class="row">
                             <div class="col-md-3" v-for="n in 4 " v-bind:id="hotMovie[n+7].title" v-on:click="getDetail($event)">
-                                <img v-bind:src="hotMovie[n+7].title" style="width:160px" />
+                                <div class="row">
+                                    <div class="col-md-12"><img v-bind:src="hotMovie[n+7].poster" style="width:160px" /></div>
+                                    <div class="col-md-12"><span style="color:orangered">{{hotMovie[n+7].title}}</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -200,7 +176,8 @@
             },
             getDetail(event) {
                 var id = event.currentTarget.id
-                alert(id)
+                var href = "/Film/FilmDetail?name=" + document.getElementById('userName').innerHTML+"&input="+id
+                window.location.href = href
             },
             getSort(event) {
                 var element = event.currentTarget;

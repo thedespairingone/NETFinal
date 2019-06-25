@@ -92,43 +92,44 @@
         methods: {
             getDetail(event) {
                 var id = event.currentTarget.id
-       
+                var href = "/Film/FilmDetail?name=" + document.getElementById('userName').innerHTML + "&input=" + id
+                window.location.href = href
             },
             setCon(event) {
                 var id = event.currentTarget.id
             
                 this.nowCon = id
-                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip
+                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip + "&name=" + document.getElementById('userName').innerHTML
                 window.location.href = href
             },
             setLan(event) {
                 var id = event.currentTarget.id
            
                 this.nowLan = id
-                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip
+                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip + "&name=" + document.getElementById('userName').innerHTML
                 window.location.href = href
             },
             setGen(event) {
                 var id = event.currentTarget.id
               
                 this.nowGen = id
-                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip
+                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip + "&name=" + document.getElementById('userName').innerHTML
                 window.location.href = href
             },
             setSort(event) {
                 var id = event.currentTarget.id
                
                 this.nowSort = id
-                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip
+                var href = "/Film/FilmAll?genre=" + this.nowGen + "&language=" + this.nowLan + "&country=" + this.nowCon + "&sortMethod=" + this.nowSort + "&skip=" + this.skip + "&name=" + document.getElementById('userName').innerHTML
                 window.location.href = href
             }
         },
     })
 
 
-    btSearch.onclick = function () {
-        var searchCt = document.getElementById('searchCt').value
-        var href = "/Film/FilmSearch?input=" + searchCt
-        window.location.href = href
-    }
+    //btSearch.onclick = function () {
+    //    var searchCt = document.getElementById('searchCt').value
+    //    var href = "/Film/FilmSearch?input=" + searchCt
+    //    window.location.href = href
+    //}
 </script>

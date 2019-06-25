@@ -22,16 +22,12 @@
                     </button>
                     @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
                 <span class="glyphicon glyphicon-user"></span>
-                <label id="userName">用户名</label>
+                <label id="userName">@ViewBag.name</label>
             </div>
             <div class="navbar-collapse collapse " style="float:left">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "FilmIndex", "Film")</li>
-                    <li>@Html.ActionLink("关于", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("电影库", "FilmAll", "Film")</li>
-                    <li>@Html.ActionLink("搜索", "FilmSearch", "Film")</li>
-                    <li>@Html.ActionLink("详情", "Detail", "Home")</li>
+                    <li><a id="index">主页</a></li>
+                    <li><a id="baseMovie">电影库</a></li>
                 </ul>
             </div>
             <div style="float:right;margin-top:1.6%;margin-left:20px;">
@@ -76,7 +72,7 @@
                         <div class="form-group">
                             <label for="inputPassword" class="col-sm-2 control-label">用户名</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="signInName" placeholder="请输入用户名">
+                                <input type="text" class="form-control" id="signInName" placeholder="请输入用户名">
                             </div>
                             <label for="inputPassword" class="col-sm-2 control-label">密码</label>
                             <div class="col-sm-10">
@@ -99,7 +95,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">登陆</h4>
+                    <h4 class="modal-title" id="myModalLabel">注册</h4>
 
                 </div>
                 <div class="modal-body">
@@ -108,15 +104,15 @@
                         <div class="form-group">
                             <label for="inputPassword" class="col-sm-2 control-label">用户名</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputName" placeholder="请输入用户名">
+                                <input type="text" class="form-control" id="signupName" placeholder="请输入用户名">
                             </div>
                             <label for="inputPassword" class="col-sm-2 control-label">密码</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="请输入密码">
+                                <input type="password" class="form-control" id="signupPassword" placeholder="请输入密码">
                             </div>
                             <label for="inputPassword" class="col-sm-2 control-label">确认密码</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputConfirmPassword" placeholder="再次输入密码">
+                                <input type="password" class="form-control" id="signupConfirmPassword" placeholder="再次输入密码">
                             </div>
                         </div>
                     </form>
@@ -124,7 +120,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">注册</button>
+                    <button type="button" class="btn btn-primary" id="signupBt">注册</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
@@ -140,7 +136,7 @@
         var signInName = document.getElementById('signInName')
         var signState = false
 
-        $.post('@Url.Action("SignIn","Home")', "name=" + document.getElementById('signInName').value + "&password=" + document.getElementById('signInPassword').value)
+        $.post('@Url.Action("SignIn","Film")', "name=" + document.getElementById('signInName').value + "&password=" + document.getElementById('signInPassword').value)
             .done(function (data) {
                 if (data == '1') {
                     document.getElementById('userName').innerText = document.getElementById('signInName').value
@@ -158,9 +154,55 @@
     var btSearch = document.getElementById('searchBt')
     btSearch.onclick = function () {
         var searchCt = document.getElementById('searchCt').value
-        var href = "/Film/FilmSearch?input=" + searchCt
+        var href = "/Film/FilmSearch?input=" + searchCt + "&name=" + document.getElementById('userName').innerHTML
         window.location.href = href
     }
 
+    var btIndex = document.getElementById('index')
+    btIndex.onclick = function () {
+        var href = "/?name=" + document.getElementById('userName').innerHTML
+        window.location.href = href
+    }
+
+    var btAllMovie = document.getElementById('baseMovie')
+    btAllMovie.onclick = function () {
+        var href = "/Film/FilmAll?name=" + document.getElementById('userName').innerHTML
+        window.location.href = href
+    }
+
+    var btSignup = document.getElementById('signupBt')
+    btSignup.onclick = function () {
+
+        var name = document.getElementById('signupName').value
+        var password = document.getElementById('signupPassword').value
+        var confirmPassword = document.getElementById('signupConfirmPassword').value
+        if (name == '') {
+            alert('名字不能为空！')
+            return
+        }
+        if (password == '') {
+            alert('密码不能为空')
+            return
+        }
+        if (password != confirmPassword) {
+            alert('两次密码输入不同')
+            return
+        }    
+        $.post('@Url.Action("SignUp","Film")', "name=" + document.getElementById('signupName').value + "&password=" + document.getElementById('signupPassword').value)
+            .done(function (data) {
+                if (data == '1') {
+                    document.getElementById('userName').innerText = document.getElementById('signupName').value
+                    alert('注册成功，账户已登陆')
+                    $('#signup').modal('hide')
+                }
+                else {
+                    alert('注册失败')
+                }
+            })
+            .fail(function (data) {
+                alert('fail');
+            })
+
+    }
 
 </script>

@@ -189,23 +189,23 @@
 
         document.getElementById("duration").innerHTML = (temp.duration + "分钟");
 
-            document.getElementById("abstract").innerHTML = temp.summary;
+        document.getElementById("abstract").innerHTML = temp.summary;
 
         function AddFilm() {
-                    location.href = "/Film/AddFilm"; 
+            location.href = "/Film/AddFilm?name=" + document.getElementById('userName').innerHTML;
         }
         function DeleteFilm() {
-                location.href = "/Film/DeleteFilm?title=" + temp.title;
+            location.href = "/Film/DeleteFilm?title=" + temp.title+ "&name=" + document.getElementById('userName').innerHTML
         }
-    function EditFilm() {
-        location.href = "/Film/UpdateFilm?title=" + temp.title; 
-    }
-    function SubmitComment() {
-        location.href = "/Film/FilmDetailCommentOver?name=" + "liuchang"
-            + "&title=" + temp.title
-            +"&commentContent=" + document.getElementById("myComment").value
-            + "&rate=" + document.getElementById("myRate").value;
-    }
+        function EditFilm() {
+            location.href = "/Film/UpdateFilm?title=" + temp.title+ "&name=" + document.getElementById('userName').innerHTML
+        }
+        function SubmitComment() {
+            location.href = "/Film/FilmDetailCommentOver?name=" + document.getElementById('userName').innerHTML
+                + "&title=" + temp.title
+                + "&commentContent=" + document.getElementById("myComment").value
+                + "&rate=" + document.getElementById("myRate").value;
+        }
     </script>
 
 </body>
