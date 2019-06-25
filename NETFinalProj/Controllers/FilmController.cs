@@ -10,7 +10,7 @@ namespace NETFinalProj.Controllers
     public class FilmController : Controller
     {
         // GET: Film
-        public ActionResult FilmIndex(String name)
+        public ActionResult FilmIndex(String name=null)
         {
           
             ViewBag.Message = "Your contact page.";
@@ -27,11 +27,12 @@ namespace NETFinalProj.Controllers
             ViewBag.ItlianHighRateMovie = Film.getSortedMovieListByRate("意大利");
             ViewBag.KoreanHighRateMovie = Film.getSortedMovieListByRate("韩国");
             ViewBag.JapanHighRateMovie = Film.getSortedMovieListByRate("日本");
+            ViewBag.name = name;
             return View();
         }
 
         //sortMethod为0按照热度排序，为1按照评分排序
-        public ActionResult FilmAll(String name,String country="全部", String language = "全部", String genre = "全部", int skip=0, int sortMethod=0)
+        public ActionResult FilmAll(String name=null,String country="全部", String language = "全部", String genre = "全部", int skip=0, int sortMethod=0)
         {
             ViewBag.Message = "FilmSearch page.";
             if (sortMethod == 0)
@@ -48,30 +49,34 @@ namespace NETFinalProj.Controllers
             ViewBag.sortMethod = sortMethod;
             ViewBag.genre = genre;
             ViewBag.skip = skip;
+            ViewBag.name = name;
             return View();
         }
 
-        public ActionResult FilmDetail(String input = "")
+        public ActionResult FilmDetail(String input = "",String name=null)
         {
             Console.WriteLine(input + "Controller");
             ViewBag.SearchKey = input;
             ViewBag.Message = "Your contact page.";
             ViewBag.movie = Film.Search(input);
+            ViewBag.name =name;
             return View();
         }
 
-        public ActionResult FilmSearch(String input = "")
+        public ActionResult FilmSearch(String input = "",String name=null)
         {
             Console.WriteLine(input + "Controller");
             ViewBag.SearchKey = input;
             ViewBag.Message = "FilmSearch page.";
             ViewBag.movieList = Film.SearchAll(input);
             ViewBag.searchCt = input;
+            ViewBag.name = name;
             return View();
         }
 
-        public ActionResult AddFilm()
+        public ActionResult AddFilm(String name=null)
         {
+            ViewBag.name = name;
             return View();
         }
         public ActionResult AddFilmOver(String title, String poster,String directors, String writers, String casts, String genres, String countries,
@@ -84,32 +89,45 @@ namespace NETFinalProj.Controllers
              return Redirect("FilmIndex"); 
         }
 
-        public ActionResult UpdateFilm(String title)
+        public ActionResult UpdateFilm(String title,String name=null)
         {
+            ViewBag.name = name;
             ViewBag.movie = Film.Search(title);
             return View();
         }
 
         public ActionResult UpdateFilmOver(String title, String poster, String directors, String writers, String casts, String genres, String countries,
-        String languages, String pubdate, String length, String summary)
+        String languages, String pubdate, String length, String summary,String name=null)
         {
             Film.UpdateFilm(title, poster, directors, writers, casts, genres, countries,
          languages, pubdate, length, summary);
             ViewBag.SearchKey = title;
             ViewBag.Message = "Your contact page.";
-            return Redirect("FilmIndex");
+            ViewBag.name = name;
+            return Redirect("FilmIndex?name="+name);
         }
 
-        public ActionResult DeleteFilm(String title)
+        public ActionResult DeleteFilm(String title,String name=null)
         {
             Film.DeleteFilm(title);
             ViewBag.Message = "Your contact page.";
-            return Redirect("FilmIndex"); 
+            ViewBag.name = name;
+            return Redirect("FilmIndex?name="+name); 
         }
 
         public ActionResult TestStar()
         { 
             return View();
+        }
+
+        public JsonResult SignIn(string name, string password)
+        {
+            var judge = "1";
+            if (name == "user" && password == "1234")
+            {
+                judge = "1";
+            }
+            return Json(judge, JsonRequestBehavior.AllowGet);
         }
 
     }
