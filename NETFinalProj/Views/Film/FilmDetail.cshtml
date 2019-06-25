@@ -14,16 +14,15 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 
 </head>
-<body>
-    <text id="allMovie" hidden="hidden">
-        @ViewBag.movie
+<body >
+    <text id="allMovie" hidden="hidden">@ViewBag.movie
     </text>
 
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <br><br /><br />
-                <text  >
+                <text id="newestComments" hidden="hidden" >
                     @ViewBag.newestComments
                 </text>
             </div>
@@ -53,7 +52,7 @@
         <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-3">
-                <img src="IronMan.jpg" class="img-rounded" onerror="this.src='../Content/Images/IronMan.jpg'" id="image" height="300" width="200" />
+                <img src="IronMan.jpg" class="img-rounded"  onerror="this.src='../../image/movie5.jpg'" id="image" height="300" width="200" />
 
             </div>
             <div class="col-lg-5">
@@ -122,6 +121,19 @@
             </div>
             <div class="col-lg-3"></div>
         </div>
+       <div class="row" id="detail">
+           <div class="col-md-12"><h3>最新评论</h3></div>
+           <div class="col-md-12" v-for="one in comment">
+               <h5 class="page-header"></h5>
+               <div class="row" style="background-color:lightgray;border-radius:10px">
+                   <div class="col-md-3" style="color:orangered">电影：{{one.film}}</div>
+                   <div class="col-md-2">
+                       用户<span style="color:orangered">{{one.user}}</span>给出了{{one.rate}}的评分
+                   </div>
+                   <div class="col-md-7">{{one.content}}</div>
+               </div>
+           </div>
+       </div>
     </div>
 
     <script>
@@ -192,15 +204,35 @@
         document.getElementById("abstract").innerHTML = temp.summary;
 
         function AddFilm() {
+            var userName = document.getElementById('userName').innerHTML
+            if (userName == '') {
+                alert('未登录，无操作权限')
+                return
+            }
             location.href = "/Film/AddFilm?name=" + document.getElementById('userName').innerHTML;
         }
         function DeleteFilm() {
+            var userName = document.getElementById('userName').innerHTML
+            if (userName == '') {
+                alert('未登录，无操作权限')
+                return
+            }
             location.href = "/Film/DeleteFilm?title=" + temp.title+ "&name=" + document.getElementById('userName').innerHTML
         }
         function EditFilm() {
+            var userName = document.getElementById('userName').innerHTML
+            if (userName == '') {
+                alert('未登录，无操作权限')
+                return
+            }
             location.href = "/Film/UpdateFilm?title=" + temp.title+ "&name=" + document.getElementById('userName').innerHTML
         }
         function SubmitComment() {
+            var userName = document.getElementById('userName').innerHTML
+            if (userName == '') {
+                alert('未登录，无操作权限')
+                return
+            }
             location.href = "/Film/FilmDetailCommentOver?name=" + document.getElementById('userName').innerHTML
                 + "&title=" + temp.title
                 + "&commentContent=" + document.getElementById("myComment").value
@@ -211,4 +243,14 @@
 </body>
 
 </html>
-
+<script>
+    var detail = new Vue({
+        el: '#detail',
+        data: {
+            comment: JSON.parse(document.getElementById('newestComments').innerHTML),
+        },
+        methods: {
+     
+        }
+    })
+</script>

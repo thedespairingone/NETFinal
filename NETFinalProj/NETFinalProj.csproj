@@ -173,6 +173,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="image\back.jpg" />
+    <Content Include="image\back2.jpg" />
     <Content Include="image\movie.jpg" />
     <Content Include="image\sky.jpg" />
     <Content Include="image\test2.jpg" />

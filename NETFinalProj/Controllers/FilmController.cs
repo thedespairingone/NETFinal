@@ -12,9 +12,6 @@ namespace NETFinalProj.Controllers
         // GET: Film
         public ActionResult FilmIndex(String name=null)
         {
-
-            MyUser.AddUser("TKT","1234");
-            MyUser.JudgeRight("TKT", "5656");
             ViewBag.Message = "Your contact page.";
        
             //热门电影
@@ -127,7 +124,7 @@ namespace NETFinalProj.Controllers
             Comment.SubmitComment(name,title,commentContent,Rate);
             Film.SubmitRate(title, Rate);
             ViewBag.movie = Film.Search(title);
-            return View();
+            return Redirect("FilmDetail?input=" + title+"&name="+name);
         }
 
         public ActionResult TestStar()
@@ -137,8 +134,8 @@ namespace NETFinalProj.Controllers
 
         public JsonResult SignIn(string name, string password)
         {
-            var judge = "1";
-            if (name == "user" && password == "1234")
+            var judge = "-1";
+            if (MyUser.JudgeRight(name,password)== "right")
             {
                 judge = "1";
             }
@@ -148,10 +145,7 @@ namespace NETFinalProj.Controllers
         public JsonResult SignUp(string name, string password)
         {
             var judge = "1";
-            if (name == "user" && password == "1234")
-            {
-                judge = "1";
-            }
+            MyUser.AddUser(name, password);
             return Json(judge, JsonRequestBehavior.AllowGet);
         }
 

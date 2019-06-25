@@ -36,7 +36,7 @@ namespace NETFinalProj.Services
             //    movies.Add(documents[i].ToJson());
             //}
             //String someMovie = GetJSON.getJsonString(movies);
-            var documents = GetConnectFilm.collection.Find(filter).ToList();
+            var documents = GetConnectUser.collection.Find(filter).ToList();
             List<string> comments = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {

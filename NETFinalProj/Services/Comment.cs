@@ -6,7 +6,7 @@ using NETFinalProj.Dao;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using Newtonsoft.Json;
-
+using GetJSON;
 namespace NETFinalProj.Services
 {
     public class Comment
@@ -25,7 +25,7 @@ namespace NETFinalProj.Services
             {
                 comments.Add(documents[i].ToJson());
             }
-            String someComments = GetJSON.getJsonString(comments);
+            String someComments = GetJSON.GetJSON.getJsonString(comments);
             return someComments;
         }
 
@@ -42,7 +42,7 @@ namespace NETFinalProj.Services
             {
                 comments.Add(documents[i].ToJson());
             }
-            String someComments = GetJSON.getJsonString(comments);
+            String someComments = GetJSON.GetJSON.getJsonString(comments);
             return someComments;
         }
 
