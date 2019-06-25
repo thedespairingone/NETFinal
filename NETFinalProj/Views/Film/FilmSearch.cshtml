@@ -17,9 +17,9 @@
 
             <div class="col-md-12">
                 <div class="row">
-                    <div v-for="one in movieList" class="col-md-2" v-bind:id="one.title" style="height:300px"  v-on:click="getDetail($event)">
+                    <div v-for="one in movieList" class="col-md-2" v-bind:id="one.title" style="height:350px"  v-on:click="getDetail($event)">
                   
-                        <img v-bind:src="one.poster" style="width:180px;" />
+                        <img v-bind:src="one.poster" style="width:180px;height:270px"  onerror="this.src='../../image/movie5.jpg'" />
 
                         <div class="row" style="margin-left:0px;margin-right:0px;width:180px">
                             <div class="col-md-12">{{one.title}}<span style="color:goldenrod">{{one.rating_average}}</span></div>

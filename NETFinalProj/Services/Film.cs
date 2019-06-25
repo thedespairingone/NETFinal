@@ -5,6 +5,7 @@ using System.Web;
 using NETFinalProj.Dao;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using GetJSON;
 using Newtonsoft.Json;
 
 namespace NETFinalProj.Services
@@ -15,13 +16,14 @@ namespace NETFinalProj.Services
         {
             var filter = Builders<BsonDocument>.Filter.Exists("rating");
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
+            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie =GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
         public static String getSortedMovieListByRate(String country)
@@ -29,65 +31,70 @@ namespace NETFinalProj.Services
 
             var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
+            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
         public static String getSortedMovieListByHot()
         {
             var filter = Builders<BsonDocument>.Filter.Exists("rating");
             var sort = Builders<BsonDocument>.Sort.Descending("rating.rating_people");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
+            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
         public static String getSortedMovieListByHot(String country)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.rating_people");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
+            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Project(projection).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
         public static String getMovies(int skip)
         {
             var filter = Builders<BsonDocument>.Filter.Empty;
-            var documents = GetConnectFilm.collection.Find(filter).Skip(skip).Limit(20).ToList();
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
+            var documents = GetConnectFilm.collection.Find(filter).Skip(skip).Project(projection).Limit(20).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
 
         public static String getMoviesDetail(int skip)
         {
             var filter = Builders<BsonDocument>.Filter.Empty;
-            var documents = GetConnectFilm.collection.Find(filter).Skip(skip).Limit(1).ToList();
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
+            var documents = GetConnectFilm.collection.Find(filter).Skip(skip).Project(projection).Limit(1).ToList();
 
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
 
@@ -109,7 +116,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
 
@@ -129,7 +136,7 @@ namespace NETFinalProj.Services
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
 
@@ -159,13 +166,14 @@ namespace NETFinalProj.Services
 
             //var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Skip(skip).Limit(120).ToList();
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
+            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Skip(skip).Project(projection).Limit(120).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
         //FilmAllPage
@@ -193,13 +201,14 @@ namespace NETFinalProj.Services
             //, builder.Eq("genres", genre));
             //var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.rating_people");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Skip(skip).Limit(120).ToList();
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id").Exclude("lastModified");
+            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Skip(skip).Project(projection).Limit(120).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
                 movies.Add(documents[i].ToJson());
             }
-            String someMovie = GetJSON.getJsonString(movies);
+            String someMovie = GetJSON.GetJSON.getJsonString(movies);
             return someMovie;
         }
 
