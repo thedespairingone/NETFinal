@@ -1,9 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "FilmSearch";
-}
-@ViewBag.movieList
-<h2>FilmSearch</h2>
+﻿<h2>FilmSearch</h2>
 <!DOCTYPE html>
 
 <html>
@@ -11,57 +6,47 @@
     <meta name="viewport" content="width=device-width" />
     <title></title>
 </head>
-<body>
+<body class="container">
+    <text hidden="hidden" id="searchMovieList"> @ViewBag.movieList</text>
     <div id="search">
         <div class="row">
             <div class="col-md-12"><h5 class="page-header"></h5></div>
-            <div class="col-md-12">搜索关键词“<span style="color:goldenrod">皮卡丘</span>”共计100条搜索结果</div>
+            <div class="col-md-12">搜索关键词“<span style="color:goldenrod">@ViewBag.searchCt</span>”</div>
         </div>
         <div class="row">
-            @*<div class="col-md-12"><h5 class="page-header"></h5></div>*@
+
             <div class="col-md-12">
                 <div class="row">
-                    <div v-for="n in 24" class="col-md-2">
-                        @* 这块加电影 *@
-                        <img src="~/image/movie.jpg" style="width:180px;" />
+                    <div v-for="one in movieList" class="col-md-2" v-bind:id="one.title" style="height:300px"  v-on:click="getDetail($event)">
+                  
+                        <img v-bind:src="one.poster" style="width:180px;" />
 
                         <div class="row" style="margin-left:0px;margin-right:0px;width:180px">
-                            <div class="col-md-9">皮卡丘大侦探</div>
-                            <div class="col-md-2" style="color:goldenrod">9.0</div>
-                            <div class="col-md-9">主演：皮卡丘</div>
+                            <div class="col-md-12">{{one.title}}<span style="color:goldenrod">{{one.rating_average}}</span></div>
                         </div>
-
                         <div class="col-md-12"><h5 class="page-header"></h5></div>
                     </div>
+
+
                 </div>
             </div>
-            <div class="col-md-12">
-                <nav aria-label="Page navigation" style="text-align:center">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+
         </div>
     </div>
 </body>
 </html>
 <script>
-    var app = new Vue({
-        el: '#search'
+    var search = new Vue({
+        el: '#search',
+        data: {           
+            movieList: JSON.parse(document.getElementById('searchMovieList').innerHTML),   
+        },
+        methods: {
+            getDetail(event) {
+                var id = event.currentTarget.id
+                alert(id)
+            },
+          
+        }
     })
 </script>

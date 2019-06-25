@@ -10,13 +10,11 @@ namespace NETFinalProj.Controllers
     public class FilmController : Controller
     {
         // GET: Film
-        public ActionResult FilmIndex(String input="")
+        public ActionResult FilmIndex(String name)
         {
-            Console.WriteLine(input + "Controller");
-            ViewBag.SearchKey = input;
+          
             ViewBag.Message = "Your contact page.";
-            ViewBag.movie = Film.Search(input);
-            ViewBag.movieRank15 = "";
+       
             //热门电影
             ViewBag.hotMovie = Film.getSortedMovieListByHot();
             ViewBag.ChineseHotMovie = Film.getSortedMovieListByHot("中国");
@@ -33,7 +31,7 @@ namespace NETFinalProj.Controllers
         }
 
         //sortMethod为0按照热度排序，为1按照评分排序
-        public ActionResult FilmAll(String country="", String language = "", String genre = "", int skip=0, int sortMethod=0)
+        public ActionResult FilmAll(String name,String country="全部", String language = "全部", String genre = "全部", int skip=0, int sortMethod=0)
         {
             ViewBag.Message = "FilmSearch page.";
             if (sortMethod == 0)
@@ -44,6 +42,12 @@ namespace NETFinalProj.Controllers
             {
                 ViewBag.movies = Film.getAllFilmSortByRate(country, language, genre, skip);
             }
+            ViewBag.country = country;
+            ViewBag.language = language;
+            ViewBag.skip = skip;
+            ViewBag.sortMethod = sortMethod;
+            ViewBag.genre = genre;
+            ViewBag.skip = skip;
             return View();
         }
 
@@ -62,6 +66,7 @@ namespace NETFinalProj.Controllers
             ViewBag.SearchKey = input;
             ViewBag.Message = "FilmSearch page.";
             ViewBag.movieList = Film.SearchAll(input);
+            ViewBag.searchCt = input;
             return View();
         }
 

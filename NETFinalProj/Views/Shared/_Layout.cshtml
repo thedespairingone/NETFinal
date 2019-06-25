@@ -26,11 +26,11 @@
             </div>
             <div class="navbar-collapse collapse " style="float:left">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
+                    <li>@Html.ActionLink("主页", "FilmIndex", "Film")</li>
                     <li>@Html.ActionLink("关于", "About", "Home")</li>
                     <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("电影库", "Base", "Home")</li>
-                    <li>@Html.ActionLink("搜索", "Search", "Home")</li>
+                    <li>@Html.ActionLink("电影库", "FilmAll", "Film")</li>
+                    <li>@Html.ActionLink("搜索", "FilmSearch", "Film")</li>
                     <li>@Html.ActionLink("详情", "Detail", "Home")</li>
                 </ul>
             </div>
@@ -41,9 +41,9 @@
             <div style="float:right;margin-top:0.8%">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        <button class="btn btn-default" type="button" id="searchBt"><span class="glyphicon glyphicon-search"></span></button>
                     </span>
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Search for..." id="searchCt">
                 </div><!-- /input-group -->
             </div>
         </div>
@@ -138,7 +138,7 @@
     btSignIn.onclick = function () {
         var signInPassword = document.getElementById('signInPassword')
         var signInName = document.getElementById('signInName')
-
+        var signState = false
 
         $.post('@Url.Action("SignIn","Home")', "name=" + document.getElementById('signInName').value + "&password=" + document.getElementById('signInPassword').value)
             .done(function (data) {
@@ -155,6 +155,12 @@
             })
     }
 
+    var btSearch = document.getElementById('searchBt')
+    btSearch.onclick = function () {
+        var searchCt = document.getElementById('searchCt').value
+        var href = "/Film/FilmSearch?input=" + searchCt
+        window.location.href = href
+    }
 
 
 </script>

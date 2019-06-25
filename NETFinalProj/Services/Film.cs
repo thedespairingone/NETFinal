@@ -14,7 +14,7 @@ namespace NETFinalProj.Services
         {
             var filter = Builders<BsonDocument>.Filter.Exists("rating");
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
-            var documents=GetConnectFilm.collection.Find(filter).Sort(sort).Limit(20).ToList();
+            var documents=GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -28,7 +28,7 @@ namespace NETFinalProj.Services
             
             var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(20).ToList();
+            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -41,7 +41,7 @@ namespace NETFinalProj.Services
         {
             var filter = Builders<BsonDocument>.Filter.Exists("rating");
             var sort = Builders<BsonDocument>.Sort.Descending("rating.rating_people");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(15).ToList();
+            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -54,7 +54,7 @@ namespace NETFinalProj.Services
         {
             var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.rating_people");
-            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(20).ToList();
+            var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Limit(12).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -100,8 +100,8 @@ namespace NETFinalProj.Services
             FilterDefinition<BsonDocument> filter;
             //filter = builder.And(builder.All("_id", input));
             filter = builder.Or(builder.Regex("title", input),builder.Regex("casts.name",input)
-            , builder.Regex("directors.name", input));
-            var documents = GetConnectFilm.collection.Find(filter).ToList();
+            , builder.Regex("directors.name", input), builder.Regex("genres", input), builder.Regex("summary", input));
+            var documents = GetConnectFilm.collection.Find(filter).Limit(24).ToList();
             List<string> movies = new List<string>();
             for (int i = 0; i < documents.Count; i++)
             {
@@ -131,12 +131,28 @@ namespace NETFinalProj.Services
         }
 
         //FilmAllPage
-        public static String getAllFilmSortByHot(String country,String language,String genre,int skip)
+        public static String getAllFilmSortByHot(String country, String language, String genre, int skip)
         {
             var builder = Builders<BsonDocument>.Filter;
             FilterDefinition<BsonDocument> filter;
-            filter = builder.And(builder.Eq("countries", country), builder.Eq("languages", language)
-            , builder.Eq("genres", genre));
+            if (country == "全部" && language == "全部" && genre == "全部")
+            {
+                filter = Builders<BsonDocument>.Filter.Empty;
+            }
+            else if (country != "全部" && language == "全部" && genre == "全部")
+            { filter = builder.And(builder.Eq("countries", country)); }
+            else if (country == "全部" && language != "全部" && genre == "全部")
+            { filter = builder.And(builder.Eq("languages", language)); }
+            else if (country == "全部" && language == "全部" && genre != "全部")
+            { filter = builder.And(builder.Eq("genres", genre)); }
+            else if (country != "全部" && language != "全部" && genre == "全部")
+            { filter = builder.And(builder.Eq("countries", country), builder.Eq("languages", language)); }
+            else if (country == "全部" && language != "全部" && genre != "全部")
+            { filter = builder.And(builder.Eq("languages", language), builder.Eq("genres", genre)); }
+            else if (country != "全部" && language == "全部" && genre != "全部")
+            { filter = builder.And(builder.Eq("countries", country), builder.Eq("genres", genre)); }
+            else
+            { filter = builder.And(builder.Eq("countries", country), builder.Eq("languages", language), builder.Eq("genres", genre)); }
 
             //var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.average");
@@ -154,8 +170,24 @@ namespace NETFinalProj.Services
         {
             var builder = Builders<BsonDocument>.Filter;
             FilterDefinition<BsonDocument> filter;
-            filter = builder.And(builder.Eq("countries", country), builder.Eq("languages", language)
-            , builder.Eq("genres", genre));
+            if (country == "全部" && language == "全部" && genre == "全部")
+            { filter = Builders<BsonDocument>.Filter.Empty; }
+            else if (country != "全部" && language == "全部" && genre == "全部")
+            { filter = builder.And(builder.Eq("countries", country)); }
+            else if (country == "全部" && language != "全部" && genre == "全部")
+            { filter = builder.And(builder.Eq("languages", language)); }
+            else if (country == "全部" && language == "全部" && genre != "全部")
+            { filter = builder.And(builder.Eq("genres", genre)); }
+            else if (country != "全部" && language != "全部" && genre == "全部")
+            { filter = builder.And(builder.Eq("countries", country), builder.Eq("languages", language)); }
+            else if (country == "全部" && language != "全部" && genre != "全部")
+            { filter = builder.And(builder.Eq("languages", language), builder.Eq("genres", genre)); }
+            else if (country != "全部" && language == "全部" && genre != "全部")
+            { filter = builder.And(builder.Eq("countries", country), builder.Eq("genres", genre)); }
+            else
+            { filter = builder.And(builder.Eq("countries", country), builder.Eq("languages", language), builder.Eq("genres", genre)); }
+            //filter = builder.And(builder.Eq("countries", country), builder.Eq("languages", language)
+            //, builder.Eq("genres", genre));
             //var filter = Builders<BsonDocument>.Filter.Eq("countries", country);
             var sort = Builders<BsonDocument>.Sort.Descending("rating.rating_people");
             var documents = GetConnectFilm.collection.Find(filter).Sort(sort).Skip(skip).Limit(120).ToList();
