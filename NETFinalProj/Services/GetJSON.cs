@@ -20,6 +20,7 @@ namespace NETFinalProj.Services
             {
                 json = json + ',';
                 json = json + allData[i];
+                System.Diagnostics.Debug.WriteLine(allData[i]);
             }
             json = json + ']';
 

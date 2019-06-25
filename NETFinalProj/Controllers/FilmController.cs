@@ -65,5 +65,47 @@ namespace NETFinalProj.Controllers
             return View();
         }
 
+        public ActionResult AddFilm()
+        {
+            return View();
+        }
+        public ActionResult AddFilmOver(String title, String poster,String directors, String writers, String casts, String genres, String countries,
+        String languages, String pubdate, String length, String summary)
+        {
+            Film.InsertFilm( title,  poster, directors,  writers,  casts,  genres,  countries,
+         languages,  pubdate,  length,  summary);
+            ViewBag.SearchKey = title;
+            ViewBag.Message = "Your contact page.";
+             return Redirect("FilmIndex"); 
+        }
+
+        public ActionResult UpdateFilm(String title)
+        {
+            ViewBag.movie = Film.Search(title);
+            return View();
+        }
+
+        public ActionResult UpdateFilmOver(String title, String poster, String directors, String writers, String casts, String genres, String countries,
+        String languages, String pubdate, String length, String summary)
+        {
+            Film.UpdateFilm(title, poster, directors, writers, casts, genres, countries,
+         languages, pubdate, length, summary);
+            ViewBag.SearchKey = title;
+            ViewBag.Message = "Your contact page.";
+            return Redirect("FilmIndex");
+        }
+
+        public ActionResult DeleteFilm(String title)
+        {
+            Film.DeleteFilm(title);
+            ViewBag.Message = "Your contact page.";
+            return Redirect("FilmIndex"); 
+        }
+
+        public ActionResult TestStar()
+        { 
+            return View();
+        }
+
     }
 }

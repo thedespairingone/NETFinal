@@ -178,6 +178,29 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Film\css\star-rating.css" />
+    <Content Include="Views\Film\css\star-rating.min.css" />
+    <Content Include="Views\Film\examples\index.html" />
+    <Content Include="Views\Film\examples\sample.html" />
+    <Content Include="Views\Film\img\loading.gif" />
+    <Content Include="Views\Film\js\locales\ar.js" />
+    <Content Include="Views\Film\js\locales\de.js" />
+    <Content Include="Views\Film\js\locales\es.js" />
+    <Content Include="Views\Film\js\locales\fa.js" />
+    <Content Include="Views\Film\js\locales\fr.js" />
+    <Content Include="Views\Film\js\locales\it.js" />
+    <Content Include="Views\Film\js\locales\ko.js" />
+    <Content Include="Views\Film\js\locales\LANG.js" />
+    <Content Include="Views\Film\js\locales\pl.js" />
+    <Content Include="Views\Film\js\locales\pt-BR.js" />
+    <Content Include="Views\Film\js\locales\ro.js" />
+    <Content Include="Views\Film\js\locales\ru.js" />
+    <Content Include="Views\Film\js\locales\tr.js" />
+    <Content Include="Views\Film\js\locales\ua.js" />
+    <Content Include="Views\Film\js\locales\zh.js" />
+    <Content Include="Views\Film\js\star-rating.js" />
+    <Content Include="Views\Film\js\star-rating.min.js" />
+    <Content Include="Views\Film\sample.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -196,6 +219,10 @@
     <Content Include="Views\Film\FilmSearch.cshtml" />
     <Content Include="Views\Film\FilmDetail.cshtml" />
     <Content Include="Views\Film\FilmAll.cshtml" />
+    <Content Include="Views\Film\TestStar.cshtml" />
+    <Content Include="Views\Film\AddFilm.cshtml" />
+    <Content Include="Views\Film\AddFilmOver.cshtml" />
+    <Content Include="Views\Film\UpdateFilm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

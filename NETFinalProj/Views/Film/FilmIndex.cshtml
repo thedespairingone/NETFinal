@@ -1,167 +1,29 @@
-﻿@*@{
-        ViewBag.Title = "FilmIndex";
-    }
-    //热门电影
-    @ViewBag.hotMovie
-    <br />
-    //高评分电影
-    @ViewBag.highRateMovie
-    <br />
-    //高评分中国电影
-    @ViewBag.ChineseHighRateMovie
-    <br />
-    //高评分美国电影
-    @ViewBag.AmericanHighRateMovie
-    <br />
-    //高评分英国电影
-    @ViewBag.EnglishHighRateMovie
-    <br />
-    //高评分意大利电影
-    @ViewBag.ItlianHighRateMovie
-    <br />
-    //高评分韩国电影
-    @ViewBag.KoreanHighRateMovie
-    <br />
-    //高评分日本电影
-    @ViewBag.JapanHighRateMovie
-    <h2>FilmIndex</h2>*@
+﻿
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "FilmIndex";
 }
+//热门电影
+@ViewBag.hotMovie 
+<br />
+//高评分电影
+@ViewBag.highRateMovie
+<br />
+//高评分中国电影
+@ViewBag.ChineseHighRateMovie
+<br />
+//高评分美国电影
+@ViewBag.AmericanHighRateMovie
+<br />
+//高评分英国电影
+@ViewBag.EnglishHighRateMovie
+<br />
+//高评分意大利电影
+@ViewBag.ItlianHighRateMovie
+<br />
+//高评分韩国电影
+@ViewBag.KoreanHighRateMovie
+<br />
+//高评分日本电影
+@ViewBag.JapanHighRateMovie
+<h2>FilmIndex</h2>
 
-<style>
-    .gd {
-        margin-left: 4px;
-        margin-right: 4px;
-    }
-
-    .gdImage {
-        height: 200px;
-        width: 150px;
-        border-radius: 20px;
-    }
-
-    .gdText {
-        text-align: center;
-    }
-</style>
-<div id="app">
-
-    <div class="row">
-        <div class="col-md-9" style="margin-right:0;padding-right:0;height:250px">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- 轮播（Carousel）指标 -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-                <!-- 轮播（Carousel）项目 -->
-                <div class="carousel-inner img-rounded">
-                    <div class="item active">
-                        <div class="row">
-                            <div class="col-md-3" v-for="n in 4 ">
-                                <img src="~/image/movie.jpg" style="width:160px" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-md-3" v-for="n in 4 ">
-                                <img src="~/image/movie.jpg" style="width:160px" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-md-3" v-for="n in 4 ">
-                                <img src="~/image/movie.jpg" style="width:160px" />
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3" style="margin-left:0;padding-left:0;height:250px;">
-
-
-            <a href="#" class="list-group-item active">
-                高分电影榜
-            </a>
-            <a href="#" class="list-group-item list-group-item-danger">Top1 钢铁侠</a>
-            <a href="#" class="list-group-item list-group-item-warning">Top2 复仇者联盟4</a>
-            <a href="#" class="list-group-item list-group-item-success">Top3 玩具总动员</a>
-            <a href="#" class="list-group-item">Top4 夏洛特烦恼</a>
-            <a href="#" class="list-group-item">Top5 哥斯拉</a>
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <nav class="navbar navbar-default" role="navigation">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">热门电影</a>
-                    </div>
-                    <div>
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">热门</a></li>
-                            <li><a href="#">华语</a></li>
-                            <li><a href="#">欧美</a></li>
-                            <li><a href="#">日本</a></li>
-                            <li><a href="#">韩国</a></li>
-                            <li><a href="#">印度</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div class="col-md-2" v-for="n in 12" style="margin-bottom:20px">
-            <div class="row">
-                @* 这块加电影 *@
-                <div class="col-md-12"><img src="~/image/movie.jpg" style="width:160px;" /></div>
-                <div class="col-md-12"><div style="width:160px;">{{n}}</div></div>
-            </div>
-        </div>
-    </div>
-    <div style="margin-top:20px">
-        <h3 class="page-header">热门评论</h3>
-    </div>
-    <div class="row">
-        <div v-for="n in 12" class="col-md-6">
-            <div class="row">
-                <div class="col-md-2">
-                    <img src="~/image/sky.jpg" style="height:100px;width:80px" />
-                </div>
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-12">这是评论者的名称</div>
-                        <div class="col-md-12">
-                            这是评论的电影
-                            <input id="input-id" type="number" class="rating" min=0 max=5 step=0.5 data-size="lg">
-                        </div>
-                        <div class="col-md-12">这是对电影的评价</div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <button class="btn btn-success">
-                        <span class="glyphicon glyphicon-thumbs-up "></span>
-                    </button>
-                    <button class="btn btn-danger">
-                        <span class="glyphicon glyphicon-thumbs-down"></span>
-                    </button>
-                </div>
-            </div>
-            <h5 class="page-header"></h5>
-        </div>
-    </div>
-</div>
-<script>
-    var app = new Vue({
-        el: '#app'
-    })
-
-</script>
